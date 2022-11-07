@@ -1,10 +1,10 @@
 (function () {
     "use strict";
-
+ 
     if (String.prototype.format == undefined) {
-        String.prototype.format = function () {
-            var args = arguments;
-            var cnt = 0;
+        let string_format_V2_0_2 = function () {
+            let args = arguments;
+            let cnt = 0;
             return this.match(/{(\d+)}/g) == null && this.match(/{}/g) != null ?
                 this.replace(/{}/g, (match) => {
                     return typeof args[cnt] != 'undefined' ? args[cnt++] : match;
@@ -13,7 +13,10 @@
                     return typeof args[number] != 'undefined' ? args[number] : match;
                 });
         };
+        String.prototype.format = string_format_V2_0_2;
     } else {
-        throw 'String.prototype.format defined.';
+        if (String.prototype.format.name != 'string_format_V2_0_2') {
+            throw 'String.prototype.format defined.';
+        }
     }
 })();
